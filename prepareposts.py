@@ -38,8 +38,10 @@ def format_parameters_element(parameters_str):
 def format_element(element, heading):
     if heading == 'query_parameters':
       return format_parameters_element(element)
-    elif heading == 'path_parameters'
+    elif heading == 'path_parameters':
       return format_parameters_element(element)
+    else:
+      return element
 
 def format_row(rowdict):
   for k in rowdict:
