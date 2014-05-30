@@ -633,7 +633,19 @@ code {
 }
 
 #content .body p > code {
+/*
   display: block;
   padding: 15px;
+*/
   white-space: pre;
+}
+
+#content .body pre {
+    padding: 6pt;
+    background-color: #eef1f2;
+  border: 1px solid #e2e7ea;
+}
+
+#content .body pre > code {
+  border: 0;
 }

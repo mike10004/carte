@@ -1,3 +1,18 @@
+## Why this fork
+
+A script has been added to generate REST endpoint documentation from
+a source CSV file. See `_posts_templates/endpoint.md` and 
+`posts_templates/endpoints.csv` for an example.
+
+The script is `prepareposts.py`. Run it from the project directory,
+and takes the documentation bits from the cells in the CSV and inserts
+them into the template to create multiple endpoint documentation files.
+The resulting files are written to `_posts`. Run the script before
+starting Jekyll, and if you modify the templates or source CSV, you
+must stop Jekyll, re-run `prepareposts.py`, and start Jekyll again.
+
+The rest of this readme is the upstream text.
+
 ## The "What ?" and the "Why ?"
 
 **Carte** is a simple Jekyll based documentation website for APIs. It is designed as a boilerplate to build your own documentation and is heavily inspired from [Swagger](http://swagger.wordnik.com/) and [I/O docs](http://www.mashery.com/product/io-docs). Fork it, add specifications for your APIs calls and customize the theme. <small>Go ahead, see if we care.</small>
