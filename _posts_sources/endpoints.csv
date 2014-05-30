@@ -1,0 +1,13 @@
+year,month,day,category,path,method,title,summary,path_parameters,query_parameters,request_body,response_code_success,response_content_type,response_body
+2012,11,5,Customers,/api/customers,GET,Fetch many customers,Fetch list of customers. Returns only customers the authenticated user is authorized to view.,,"pageStart
+pageSize",,200 OK,application/json,Pageable array of [Customer](#/type-customer) objects
+2012,11,4,Customers,/api/customers/{customerId},GET,Fetch one customer,Fetch one customer by ID. Authenticated user must have permission to view this customer.,`{customerId}` the customer ID,,,200 OK,application/json,[Customer](#/type-customer) object
+2012,11,3,Customers,/api/customers,POST,Create customer,Create customer. Authenticated user must have permission to modify this customer..,,,"[Customer](#/type-customer) object, without `customerId`",201 Created,application/json,"[Customer](#/type-customer) object, with `customerId` value"
+2012,11,2,Customers,/api/identities/{customerId},PUT,Modify customer,Modify customer. Authenticated user must have permission to modify this customer..,`{customerId}` the customer ID,,[Customer](#/type-customer) object,204 No content,,
+2012,11,1,Customers,/api/identities/{customerId},DELETE,Delete customer,Delete customer. Authenticated user must have permission to modify this customer..,`{customerId}` the customer ID,,,204 No content,,
+2012,10,5,Orders,/api/orders,GET,Fetch many orders,Fetch list of orders. Returns only orders belonging to customers the authenticated user is authorized to view.,,"pageStart
+pageSize",,200 OK,application/json,Pageable array of [Order](#/types) objects
+2012,10,4,Orders,/api/orders/{orderId},GET,Fetch one order,Fetch order by orderId. Authenticated user must have permission to view this order's customer,`{orderId}` the order ID,,,200 OK,application/json,[Order](#/types) object
+2012,10,3,Orders,/api/orders,POST,Create order,Create order. Authenticated user must have permission to modify this order's customer.,,,"[Order](#/types) object, without `orderId`",201 Created,application/json,"[Order](#/types) object, with `orderId` value"
+2012,10,2,Orders,/api/orders/{orderId},PUT,Modify order,Modify order. Authenticated user must have permission to modify this order's customer.,`{orderId}` the order ID,,[Order](#/types) object,204 No content,,
+2012,10,1,Orders,/api/orders/{orderId},DELETE,Delete order,Delete order. Authenticated user must have permission to modify this order's customer.,`{orderId}` the order ID,,,204 No content,,
