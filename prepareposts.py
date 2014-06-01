@@ -67,13 +67,14 @@ def load_content(kind, content_dir=POST_SOURCES_DIR):
 
 def construct_filename(content, kind):
     year, month, day = tuple([int(content[k]) for k in ('year', 'month', 'day')])
+    extension = os.path.splitext(glob.glob(os.path.join(POST_TEMPLATES_DIR, kind + '.*')))[1]
     if kind == 'endpoint':
       category = content['category'].lower()
       method = content['method'].lower()
-      return "%04d-%02d-%02d-x-%s-%s.md" % (year, month, day, method, category)
+      return "%04d-%02d-%02d-x-%s-%s%s" % (year, month, day, method, category, extension)
     elif kind == 'type':
       type_name = content['type_name'].lower()
-      return "%04d-%02d-%02d-x-%s-%s.md" % (year, month, day, 'type', type_name)
+      return "%04d-%02d-%02d-x-%s-%s%s" % (year, month, day, 'type', type_name, extension)
 
 def coalesce_type_fields(pagedefs):
   typedefs = {}
@@ -117,7 +118,7 @@ def render_contents(template, pagedefs, kind):
       print "created", filename
 
 def load_kinds():
-  template_files = glob.glob(os.path.join(POST_TEMPLATES_DIR, '*.md'))
+  template_files = glob.glob(os.path.join(POST_TEMPLATES_DIR, '*.*'))
   return [os.path.splitext(os.path.basename(f))[0] for f in template_files]
 
 def main():

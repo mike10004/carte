@@ -1,0 +1,22 @@
+---
+category: Types
+title: '{{ type_name }}'
+
+layout: nil
+---
+
+<div class='type-summary'>
+{{ summary }}
+</div>
+
+<h3>Fields</h3>
+
+<table class="type-fields">
+{% for field in fields %}
+<tr class="type-field-row">
+  <td class="type-field-cell">**{{ field.name }}**</td>
+  <td class="type-field-cell">*{{ field.type }}*</td>
+  <td class="type-field-cell">{{ field.description }}</td>
+</tr>
+{% endfor %}
+</table>
