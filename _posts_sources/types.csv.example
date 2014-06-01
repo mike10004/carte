@@ -4,6 +4,6 @@ year,month,day,type_name,summary,field_name,field_type,field_description
 2013,12,18,Customer,,address,string,customer address
 2013,12,17,Customer,,premium,boolean,true if the customer has a premium service account
 2013,11,20,Order,Entity representing an order placed by a customer.,orderId,integer,unique id associated with the order
-2013,11,19,Order,,customerId,integer,unique id of the (customer)[#/x-type-customer] who placed the order
+2013,11,19,Order,,customerId,integer,unique id of the <a href="#/x-type-customer">customer</a> who placed the order
 2013,11,18,Order,,productCode,string,code indicating the product the customer ordered
 2013,11,17,Order,,quantity,integer,quantity of product ordered
