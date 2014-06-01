@@ -679,3 +679,16 @@ table.type-fields td {
 td.type-field-cell a {
   font-style: normal;
 }
+
+.sidebar-printable {
+  float: none;
+  height: auto;
+  position: static;
+  width: auto;
+  max-width: 7.0in;
+}
+
+.content-printable {
+  padding-left: 20px;
+  max-width: 7.0in;
+}
