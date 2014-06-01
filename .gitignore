@@ -10,3 +10,5 @@ _site/
 
 # auto-generated posts
 _posts/????-??-??-x-*.*
+_posts_sources/*.csv
+
