@@ -7,6 +7,7 @@ Created on May 28, 2014
 '''
 
 import csv
+import glob
 from jinja2 import Environment, PackageLoader
 import os.path
 
@@ -20,9 +21,8 @@ def format_parameters_element(parameters_str):
     parameters = []
     for parameter_str in parameters_str.split("\n"):
       attributes = parameter_str.split(' ', 3)
-      pname = attributes[0]
+      pname, ptype, pdescription = attributes[0], '', ''
       if len(attributes) == 2:
-        ptype = ''
         pdescription = attributes[1]
       elif len(attributes) == 3:
         ptype = attributes[1]
@@ -32,6 +32,7 @@ def format_parameters_element(parameters_str):
         'type': ptype,
         'description': pdescription,
       })
+    return parameters
   else:
     return []
 
@@ -48,12 +49,16 @@ def format_row(rowdict):
     v = rowdict[k]
     v = format_element(v, k)
     rowdict[k] = v
+  return rowdict
 
-def load_content(filename, content_dir=POST_SOURCES_DIR):
+def load_content(kind, content_dir=POST_SOURCES_DIR):
+  filename = os.path.join(content_dir, kind + 's.csv')
   try:
-    with open(os.path.join(content_dir, filename), 'r') as ifile:
+    with open(filename, 'r') as ifile:
       reader = csv.DictReader(ifile)
-      return [row for row in reader]
+      rows = [format_row(row) for row in reader]
+      transform = _get_content_transform(kind)
+      if transform is not None: rows = transform(rows)
   except IOError as ex:
     print >> sys.stderr, ex
     print >> sys.stderr, 'skipping', filename
@@ -66,13 +71,8 @@ def construct_filename(content, kind):
       method = content['method'].lower()
       return "%04d-%02d-%02d-x-%s-%s.md" % (year, month, day, method, category)
     elif kind == 'type':
-      type_name = content['type_name']
+      type_name = content['type_name'].lower()
       return "%04d-%02d-%02d-x-%s-%s.md" % (year, month, day, 'type', type_name)
-
-def _update_last(newvalue, lastvalue):
-  if lastvalue is None:
-    return newvalue
-  return row[key] if row[key] else lastvalue
 
 def coalesce_type_fields(pagedefs):
   typedefs = {}
@@ -95,6 +95,18 @@ def coalesce_type_fields(pagedefs):
     })
   return list(typedefs.values())
 
+_CONTENT_TRANSFORMS = {
+  'endpoint': None,
+  'type': coalesce_type_fields,
+}
+
+def _get_content_transform(kind):
+  try:
+    transform = _CONTENT_TRANSFORMS[kind]
+  except KeyError:
+    transform = None
+  return transform
+
 def render_contents(template, pagedefs, kind):
   for content in pagedefs:
       filename = construct_filename(content, kind)
@@ -103,19 +115,15 @@ def render_contents(template, pagedefs, kind):
           ofile.write(rendered)
       print "created", filename
 
-def do_types():
-  template = env.get_template('type.md')
-  pagedefs = coalesce_type_fields(load_content('types.csv'))
-  render_contents(template, page, 'type')
-
-def do_endpoints():
-  template = env.get_template('endpoint.md')
-  pagedefs = load_content('endpoints.csv')
-  render_contents(template, page, 'endpoint')
+def load_kinds():
+  template_files = glob.glob(os.path.join(POST_TEMPLATES_DIR, '*.md'))
+  return [os.path.splitext(os.path.basename(f))[0] for f in template_files]
 
 def main():
-  do_types():
-  do_endpoints()
+  for kind in load_kinds():
+    template = env.get_template(kind + '.md')
+    pagedefs = load_content(kind)
+    render_contents(template, pagedefs, kind)
   return 0
 
 if __name__ == '__main__':

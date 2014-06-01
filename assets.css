@@ -441,7 +441,7 @@ code {
 #sidebar {
   background: #191919;
   color: #fff;
-  float: left;  
+  float: left;
   height: 100%;
   overflow: auto;
   position: fixed;
@@ -471,6 +471,10 @@ code {
 
 #sidebar ul#links {
   padding: 20px;
+}
+
+#sidebar ul#links h2 {
+  text-transform: capitalize;
 }
 
 #sidebar ul ul {

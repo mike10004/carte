@@ -13,11 +13,23 @@ layout: nil
 
 #### Path parameters
 
-{{ path_parameters | default('*None*', true) }}
+{% if path_parameters|length == 0 %}
+*None*
+{% else %}
+  {% for p in path_parameters %}
+* **{{ p.name }}** *{{ p.type | default('untyped', true) }}* {{ p.description }}
+  {% endfor %}
+{% endif %}
 
 #### Query parameters
 
-{{ request_parameters | default('*None*', true) }}
+{% if query_parameters|length == 0 %}
+*None*
+{% else %}
+  {% for p in query_parameters %}
+* **{{ p.name }}** *{{ p.type }}* {{ p.description }}
+  {% endfor %}
+{% endif %}
 
 #### Body
 
