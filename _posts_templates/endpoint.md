@@ -17,7 +17,7 @@ layout: nil
 *None*
 {% else %}
   {% for p in path_parameters %}
-* **{{ p.name }}** *{{ p.type | default('untyped', true) }}* {{ p.description }}
+* `{{ p.name }}` *{{ p.type | default('untyped', true) }}* {{ p.description }}
   {% endfor %}
 {% endif %}
 
@@ -27,7 +27,7 @@ layout: nil
 *None*
 {% else %}
   {% for p in query_parameters %}
-* **{{ p.name }}** *{{ p.type }}* {{ p.description }}
+* `{{ p.name }}` *{{ p.type }}* {{ p.description }}
   {% endfor %}
 {% endif %}
 

@@ -653,3 +653,25 @@ code {
 #content .body pre > code {
   border: 0;
 }
+
+td.field-name {
+
+}
+
+td.field-type {
+  font-style: italic;
+}
+
+td.field-description {
+
+}
+
+div.type-doc h3 {
+  margin-top: 10pt;
+}
+
+table.type-fields td {
+  border-collapse: collapse;
+  border: 1px #e0e0e0 dotted;
+  padding: 6px;
+}

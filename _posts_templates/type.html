@@ -5,18 +5,20 @@ title: '{{ type_name }}'
 layout: nil
 ---
 
-<div class='type-summary'>
-{{ summary }}
+<div class='type-doc'>
+  <div class='type-summary'>
+  {{ summary }}
+  </div>
+
+  <h3>Fields</h3>
+
+  <table class="type-fields">
+  {% for field in fields %}
+  <tr class="type-field-row">
+    <td class="type-field-cell field-name"><code>{{ field.name }}</code></td>
+    <td class="type-field-cell field-type">{{ field.type }}</td>
+    <td class="type-field-cell field-description">{{ field.description }}</td>
+  </tr>
+  {% endfor %}
+  </table>
 </div>
-
-<h3>Fields</h3>
-
-<table class="type-fields">
-{% for field in fields %}
-<tr class="type-field-row">
-  <td class="type-field-cell">**{{ field.name }}**</td>
-  <td class="type-field-cell">*{{ field.type }}*</td>
-  <td class="type-field-cell">{{ field.description }}</td>
-</tr>
-{% endfor %}
-</table>
