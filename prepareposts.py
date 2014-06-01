@@ -68,8 +68,7 @@ def load_content(kind, content_dir=POST_SOURCES_DIR):
       if transform is not None: rows = transform(rows)
       return rows
   except IOError as ex:
-    print >> sys.stderr, ex
-    print >> sys.stderr, 'skipping', filename
+    _log.warn(" %s not found (or reading it failed); no posts will be generated for kind '%s'", filename, kind)
     return []
 
 AUTO_GENERATED_MARKER = 'x'
