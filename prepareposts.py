@@ -59,6 +59,7 @@ def load_content(kind, content_dir=POST_SOURCES_DIR):
       rows = [format_row(row) for row in reader]
       transform = _get_content_transform(kind)
       if transform is not None: rows = transform(rows)
+      return rows
   except IOError as ex:
     print >> sys.stderr, ex
     print >> sys.stderr, 'skipping', filename
