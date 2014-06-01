@@ -675,3 +675,7 @@ table.type-fields td {
   border: 1px #e0e0e0 dotted;
   padding: 6px;
 }
+
+td.type-field-cell a {
+  font-style: normal;
+}
