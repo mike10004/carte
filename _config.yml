@@ -1,5 +1,5 @@
 ---
-exclude: ['README.markdown']
+exclude: ['README.md', 'prepareposts.py', 'prepareposts.pyc']
 permalink: ':title'
 highlighter: pygments
 safe: false
