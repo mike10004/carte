@@ -1,15 +1,15 @@
 ## Why this fork
 
-A script has been added to generate REST endpoint documentation from
-a source CSV file. See `_posts_templates/endpoint.md` and 
-`posts_templates/endpoints.csv` for an example.
+A script has been added to generate posts based on templates and source CSV
+files. Running `prepareposts.py` from the project directory takes each
+`{postkind}.*` file from the `_posts_templates` directory and uses the file
+`{postkind}s.csv` to render multiple output files in `_posts`. See the
+`endpoint` and `type` examples for a demonstration of how to create and edit
+these inputs.
 
-The script is `prepareposts.py`. Run it from the project directory,
-and takes the documentation bits from the cells in the CSV and inserts
-them into the template to create multiple endpoint documentation files.
-The resulting files are written to `_posts`. Run the script before
-starting Jekyll, and if you modify the templates or source CSV, you
-must stop Jekyll, re-run `prepareposts.py`, and start Jekyll again.
+Editing the template or source files does not automatically update the
+rendered posts, so when you make edits you have to run `prepareposts.py` again
+and restart the Jekyll server.
 
 The rest of this readme is the upstream text.
 
