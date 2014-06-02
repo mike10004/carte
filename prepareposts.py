@@ -144,7 +144,7 @@ def main():
   parser = ArgumentParser()
   parser.add_argument("--clean", action="store_true", help="delete generated posts before generating new ones")
   parser.add_argument("--log-level", choices=('debug', 'info', 'warn', 'error'), help="set logging level", default='info')
-  parser.add_argument("--debug", action="store_const", dest="log_level", const='debug')
+  parser.add_argument("--debug", action="store_const", dest="log_level", const='debug', help="set logging level to debug")
   args = parser.parse_args()
   logging.basicConfig(level=eval('logging.' + args.log_level.upper()))
   if args.clean:
