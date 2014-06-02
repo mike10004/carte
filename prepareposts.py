@@ -77,7 +77,7 @@ def construct_filename(content, kind, marker=AUTO_GENERATED_MARKER):
     year, month, day = tuple([int(content[k]) for k in ('year', 'month', 'day')])
     extension = os.path.splitext(_find_template_filename(kind))[1]
     if kind == 'endpoint':
-      category = content['category'].lower()
+      category = content['category'].lower().replace(' ', '-')
       method = content['method'].lower()
       return "%04d-%02d-%02d-%s-%s-%s%s" % (year, month, day, marker, method, category, extension)
     elif kind == 'type':
