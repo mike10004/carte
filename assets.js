@@ -9696,37 +9696,43 @@ $('#sidebar a').each(function () {
     });
 });
 
-var printable = $('<a class="control printable">Printable</a>')
-printable.click(function() {
-  $('#sidebar').css({
-    float: 'none',
-    height: 'auto',
-    position: 'static',
-    width: 'auto',
-    'max-width': '7.0in'
-  });
-  $('#content').css({
-    'padding-left': '20px',
-    'max-width': '7.0in'
-  });
-  $('ul#links input').hide();
-  $('#content > a.control').hide();
-});
-$('#content').prepend(printable);
-
-// Hide all/Show all links
+// Hide all/Show all/Printable links
 var show = $('<a class=\'control show\'>Show all</a>');
 show.click(function () {
   $('#content article:not(".active") > a').trigger('click');
 });
-$('#content').prepend(show);
 
 var hide = $('<a class=\'control hide\'>Hide all</a>');
 hide.click(function () {
   $('#content article.active > a').trigger('click');
 });
-$('#content').prepend(hide);
 
+var printable = $('<a class="control printable">Printable</a>')
+printable.click(function() {
+  $('#toc-label').css({
+    display: 'block'
+  });
+  show.trigger('click');
+  $('#sidebar').css({
+    float: 'none',
+    height: 'auto',
+    position: 'static',
+    width: 'auto',
+    'max-width': '7.0in',
+    margin: '0 auto'
+  });
+  $('#content').css({
+    'padding-left': '20px',
+    'max-width': '7.0in',
+    margin: '0 auto'
+  });
+  $('ul#links input').hide();
+  $('#content > a.control').hide();
+});
+
+$('#content').prepend(printable);
+$('#content').prepend(show);
+$('#content').prepend(hide);
 
 // Making our navigation sticky
 new Filter($('#sidebar > ul'));
